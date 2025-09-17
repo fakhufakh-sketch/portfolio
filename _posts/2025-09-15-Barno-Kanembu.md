@@ -25,4 +25,4 @@ Finally, the digital project made the collection accessible via online platforms
 
 In short, the digital Borno and Old Kanembu project demonstrates all three of Drucker’s stages—**Materials + Processing + Presentation**—in an integrated way.  
 
-![Borno manuscript]({{site.baseurl}}images/images.jpeg)
+![Borno manuscript]({{site.baseurl}}images/Old-Kanembu2.jpg)
