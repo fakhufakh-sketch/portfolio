@@ -2,7 +2,7 @@
 title: "Borno and Old Kanembu Manuscripts"
 excerpt_separator: "<!--more-->"
 categories:
-  - project1
+  - projects
 tags:
   - digital-humanities
   - manuscripts
