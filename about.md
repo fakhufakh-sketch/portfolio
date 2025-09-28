@@ -4,7 +4,6 @@ layout: about
 ---
 
 # About me
-![My picture]({{ site.baseurl }}/Image .jpeg
 [Hello! 👋 My name is Fakhriya.  
 
 I like and enjoy digital humanity course.  
