@@ -3,15 +3,23 @@ title: "About"
 layout: about
 ---
 
-# About me
-[Hello! 👋 My name is Fakhriya.  
+# About Me
 
-I like and enjoy digital humanity course.  
+[Hello everyone!  
+My name is **Fakhriya**. I am studying **ISMC at AKU**.  
 
-Some of my interests include:  
+✨ Things about me:  
+- I like travelling ✈️  
+- In my spare time, I enjoy reading fiction books or watching series on Netflix 🎬  
+- My favourite food is **pulov** 🍚  
+- My favourite colour is **grey** 🎨  
+- My favourite city is **Paris** 🗼
 
-•⁠  ⁠Studying about manuscripts   
-•⁠  ⁠Using tools like eScriptorium for manuscript transcription  
-•⁠  ⁠Learning about world cultures and histories  
+  
+ I like and enjoy digital humanity course.
 
-In my free time, I enjoy reading, watching movies, and traveling.]
+Some of my interests include:
+
+•⁠ ⁠Studying about manuscripts
+•⁠ ⁠Using tools like eScriptorium for manuscript transcription
+•⁠ ⁠Learning about world cultures and histories]
