@@ -1,4 +1,4 @@
 ---
 layout: home
-image: images/pretty-jpg.jpg
+image: images/Image .jpeg
 ---
