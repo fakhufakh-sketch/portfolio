@@ -6,7 +6,7 @@ categories:
 tags:
   - experiments
   - tests
-  - image: images/machinelearning1.jpg
+image: images/machinelearning1.jpg
 
 ---
 
