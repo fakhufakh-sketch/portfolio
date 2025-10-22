@@ -7,7 +7,7 @@ categories:
 tags:
   - CER
   - WER
-image: images/banner_PIC.jpg
+image: images/PIC.jpg
 ---
 
 Evaluate OCR Output Quality with Character Error Rate (CER) and Word Error Rate (WER)!
