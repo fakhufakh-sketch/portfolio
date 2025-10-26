@@ -9,4 +9,5 @@ Publisher (transliterated): matba‘-e Mozaffarī,
 Year of publication (hijri): سنه۱۳۵۲نبوی
 Year of publication (common era):1933 AD
 Total number of pages:82
+
 Keywords (English):Philosophy, esotericism,sufism 
