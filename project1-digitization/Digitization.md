@@ -1,0 +1,18 @@
+---
+title: Digitization 
+permalink: /Digitization/
+layout: page
+image: images/digitization..jpg
+---
+
+The goal of this mini project is to digitise the books scanned during our class session. During the scanning process, students learned how to operate a library scanner and collect essential metadata. As part of the project, they also learned how to convert scanned images into searchable text using OCR software, and how to train the OCR system to recognise different page elements such as lines, main text and marginal notes. In addition, this project provided an opportunity for students to develop practical skills in GitHub and Python, including comparing different transcription of a text.
+
+In our class, we scanned two books and divided the class into two groups; each group was responsible for digitizing one of the assigned texts.  Our group worked on the book [Two Early Ismaili Treatises](https://github.com/fakhufakh-sketch/portfolio/blob/master/project1-digitization/export_doc8289_mini_project_alto_2025.zip), which was written in Persian script and consisted of 82 pages in total. Through this process, we learned how to handle and digitize an old Persian manuscript, gaining valuable experience in working with historical materials and understanding the specific challenges involved in digitizing non-Latin scripts.
+
+The scanning process was the easiest part of the entire project. I personally learned how to use the library scanner tools very quickly, and our whole group also became proficient in operating it and using the proper scanning tools to digitize the book efficiently. In addition, we learned how to create [metadata](https://github.com/fakhufakh-sketch/portfolio/blob/master/project1-digitization/Meta-deta.txt) and a [table of contents](https://github.com/fakhufakh-sketch/portfolio/blob/master/project1-digitization/Table%20of%20contants%201.csv) for the digitized books, and how to work with the OCR platforms to process and organise the scanned material effectively. 
+
+Four transcription models, developed by kraken for Arabic and Persian scripts, were tested on a three-page sample from the book.  Their performance, represented by CER (Character Error Rate) and WER (Word Error Rate) values, was measured with the usage of a Python script developed by instructors and students at the AKU-ISMC. The script also includes normalisation tables, which are used to further qualify the WER and CER results. Based on another Python script (built with the assistance of ChatGPT) involving basic and easily replicable functions – such as split and len– the highest-performing transcription model was concluded to be [kraken-gen2-print-n7m5-union-ft_best](https://github.com/fakhufakh-sketch/portfolio/tree/master/project1-digitization/CER_WER%20Comparison/kraken_gen2-print-n7m5-union-ft_best). The results were then authenticated against calculations made on an excel spreadsheet.
+
+Overall, the entire project was a highly engaging and insightful experience that provided us with a thorough understanding of the digitization process. We learned how to use the eScriptorium platform to transform scanned images into searchable digital texts, as well as gained basic knowledge of GitHub and Python for managing and comparing transcriptions. The project also strengthened our teamwork and communication skills, as we collaborated effectively to complete each stage. Working on the Persian manuscript Two Early Ismaili Treatises not only improved our technical abilities but also deepened our appreciation for the importance of digitally preserving historical texts and making them accessible for future research. 
+
+![Manuscript Cover Page]({{site.baseurl}}images/TwoIsmailiTreatises004.jpg)
