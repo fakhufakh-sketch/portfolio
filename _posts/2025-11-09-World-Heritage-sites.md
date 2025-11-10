@@ -35,7 +35,8 @@ To smooth out fluctuations and get a clearer view of trends, we grouped the data
 * Visualize the results:
 We created bar charts showing the percentage of Islamic sites per 5-year period, highlighting periods with more or fewer Islamic sites relative to total sites.
 
-![Manuscript Cover Page]({{site.baseurl}}images/WhatsApp Image 2025-11-09 at 23.36.58.jpeg
+
+![Manuscript Cover Page]({{site.baseurl}}images/Image1.jpeg
 
 Interpreting the Results
 
