@@ -3,7 +3,7 @@ title: "Migration of Women from Tajikistan to Moscow, Russia"
 Link to the project: https://tajikistan.iom.int, https://www.bbc.com/news/topics/cvjp2jg0p6dt/tajikistan, https://www.rferl.org/tajikistan, https://eurasianet.org/search?keywords=Tajik+women+migrant+in+Russia, https://www.worldbank.org/en/topic/migration, https://www.adb.org/search0?keywords=Women+migration
   - project1
 --- 
-image: images/Image1111.png
+image: images//Migration.jpeg
 
 Proposed Mini-Project: A Qualitative Exploration of Life Trajectories, Motivations, and Transnational Experiences of Tajik Women Migrants in Russia.
 
@@ -31,7 +31,7 @@ I will search these sites keywords such as “Tajik women migrants Russia,” �
 After selecting the texts, I will create a small dataset including the article title, publication date, source, link, and full text.
 My thesis project focuses on Women Migration from Tajikistan to Russia, so this mini-project explore how this migration represented in English-language media.
 
-![Manuscript Cover Page]({{site.baseurl}}images/Image22222.jpg
+![Migrant women in Russia]({{site.baseurl}}images/Image22222.jpg)
 
 I am particularly interested in whether the media focuses on factors such as what motivates women to migrate, why they choose specific destinations, who the women migrating are, the difficulties they face in the host country, how migration influences their economic, social, and overall quality of life, and what factors affect their decision to remain in the host country. To explore this, I will use basic digital text analysis methods suitable for beginners. I will start with word frequency counts to identify the most common terms and create a word cloud to visualise the main themes. I will also use keyword-in-context (KWIC) to examine how key words such as “women,” “migration,” and “Russia” are used in context, and perform simple theme counts to track topics like work, family, discrimination, or opportunities. These methods will help reveal patterns and highlight how media represents Tajik women migrants.
 
