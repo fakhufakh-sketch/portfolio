@@ -1,7 +1,7 @@
 ---
 title: "Migration of Women from Tajikistan to Moscow, Russia"
 Link to the project:
-  - project1
+  - project
 image: images//Picture 1.jpg
 --- 
 
