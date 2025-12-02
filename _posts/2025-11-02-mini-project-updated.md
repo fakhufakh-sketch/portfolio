@@ -1,9 +1,14 @@
 ---
 title: "Migration of Women from Tajikistan to Moscow, Russia"
-Link to the project:
+image: /images/Picture1.jpg
+links:
+  - https://tajikistan.iom.int
+  - https://www.bbc.com/news/topics/cvjp2jg0p6dt/tajikistan
+  - https://www.worldbank.org/en/topic/migration
+projects:
   - project
-image: images//Picture 1.jpg
---- 
+---
+
 
 Proposed Mini-Project: Which destination do Tajik migrants choose within Russia, and what factors influence these destination choices?  
 
