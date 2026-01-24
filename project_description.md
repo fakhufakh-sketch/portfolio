@@ -1,15 +1,14 @@
 ---
-title:  "Spatial distribution of Tajik migrants across Russian regions"
+title:  "Project 2"
 permalink: /projects/
 layout: page
 image: images/projects-banner_image
----
+--- 
 
-
+<!--more-->
 
 Mini Project 2 offered an opportunity to move beyond theoretical discussions and engage directly with digital methods for research and visualisation. The aim of the project was not only to answer a research question, but also to learn how complex data can be transformed, structured, and visualised in ways that make patterns visible and interpretable. Throughout the project, particular emphasis was placed on methodological choices, data preparation, and reflecting on the challenges encountered during the research process.
 
-<!--more-->
 
 When we were asked to choose a research question for Mini Project 2, I initially thought it would be one of the easiest parts of the project—but it turned out not to be. At first, I had chosen a very general question, but after receiving feedback from the instructor, I refined it to make it as specific as possible, ensuring it would fit the scope of this mini project. In the end, I succeeded in formulating a clear and well-defined research question. 
 
