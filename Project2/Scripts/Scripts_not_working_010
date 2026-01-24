@@ -1,0 +1,1167 @@
+import pandas as pd
+import json
+import plotly.express as px
+
+# -----------------------------
+# 1. Load cleaned Tajik migrant table
+# -----------------------------
+map_df = pd.read_csv("tajik_aggregated_correct.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Clean table for mapping
+# -----------------------------
+# Remove federal districts and statistical variants
+map_df = map_df[~map_df['Регион'].str.contains("федеральный округ|без автономного округа|без автономных округов", case=False, na=False)]
+map_df = map_df[['Регион', 'Всего']].copy()
+map_df.rename(columns={'Всего': 'tajik_migrants'}, inplace=True)
+
+# Rename regions to match GeoJSON
+rename_dict = {
+    "Кабардино-Балкарская Республика": "Кабардино-Балкария",
+    "Карачаево-Черкесская Республика": "Карачаево-Черкесия",
+    "Кемеровская область - Кузбасс": "Кемеровская область",
+    "Республика Адыгея": "Адыгея",
+    "Республика Алтай": "Алтай",
+    "Республика Башкортостан": "Башкортостан",
+    "Республика Дагестан": "Дагестан",
+    "Республика Ингушетия": "Ингушетия",
+    "Республика Крым": "Крым",
+    "Республика Марий Эл": "Марий Эл",
+    "Республика Северная Осетия - Алания": "Северная Осетия",
+    "Республика Татарстан": "Татарстан",
+    "Республика Тыва": "Тыва",
+    "Удмуртская Республика": "Удмуртия",
+    "Чеченская Республика": "Чечня",
+    "Чувашская Республика": "Чувашия"
+}
+map_df['Регион'] = map_df['Регион'].replace(rename_dict)
+
+# -----------------------------
+# 3. Load Russia GeoJSON
+# -----------------------------
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# -----------------------------
+# 4. Check missing regions (optional)
+# -----------------------------
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+missing = [name for name in map_df['Регион'] if name not in geo_names]
+print("Regions missing in GeoJSON after renaming:", missing)
+# Should be empty
+
+# -----------------------------
+# 5. Create choropleth map
+# -----------------------------
+fig = px.choropleth(
+    map_df,
+    geojson=russia_geojson,
+    locations="Регион",
+    featureidkey="properties.name",  # Critical: matches table to GeoJSON
+    color="tajik_migrants",
+    color_continuous_scale="Reds",
+    title="Distribution of Tajik Migrants Across Russian Regions",
+    hover_data={"Регион": True, "tajik_migrants": True}
+)
+
+# Adjust map display
+fig.update_geos(
+    fitbounds="locations",  # zooms to Russia
+    visible=False            # hides default map borders
+)
+
+# Optional: improve layout
+fig.update_layout(
+    margin={"r":0,"t":50,"l":0,"b":0},
+    coloraxis_colorbar=dict(title="Number of Migrants")
+)
+
+# Show map
+fig.show()
+
+
+
+
+import pandas as pd
+import json
+
+# 1. Load cleaned Tajik migrant table
+map_df = pd.read_csv("tajik_aggregated_correct.csv", encoding="utf-8-sig")
+
+# 2. Clean table for mapping
+map_df = map_df[~map_df['Регион'].str.contains("федеральный округ|без автономного округа|без автономных округов", case=False, na=False)]
+map_df = map_df[['Регион', 'Всего']].copy()
+map_df.rename(columns={'Всего': 'tajik_migrants'}, inplace=True)
+
+# 3. Rename regions to match GeoJSON
+rename_dict = {
+    "Кабардино-Балкарская Республика": "Кабардино-Балкария",
+    "Карачаево-Черкесская Республика": "Карачаево-Черкесия",
+    "Кемеровская область - Кузбасс": "Кемеровская область",
+    "Республика Адыгея": "Адыгея",
+    "Республика Алтай": "Алтай",
+    "Республика Башкортостан": "Башкортостан",
+    "Республика Дагестан": "Дагестан",
+    "Республика Ингушетия": "Ингушетия",
+    "Республика Крым": "Крым",
+    "Республика Марий Эл": "Марий Эл",
+    "Республика Северная Осетия - Алания": "Северная Осетия",
+    "Республика Татарстан": "Татарстан",
+    "Республика Тыва": "Тыва",
+    "Удмуртская Республика": "Удмуртия",
+    "Чеченская Республика": "Чечня",
+    "Чувашская Республика": "Чувашия"
+}
+map_df['Регион'] = map_df['Регион'].replace(rename_dict)
+
+# 4. Load Russia GeoJSON
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# 5. Check missing names (optional)
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+missing = [name for name in map_df['Регион'] if name not in geo_names]
+print("Regions missing in GeoJSON after renaming:", missing)
+
+
+
+import pandas as pd
+import json
+
+# -----------------------------
+# 1. Load aggregated Tajik migrants CSV
+# -----------------------------
+map_df = pd.read_csv("tajik_aggregated_correct.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Clean table for mapping
+# -----------------------------
+map_df = map_df[~map_df['Регион'].str.contains(
+    "федеральный округ|без автономного округа|без автономных округов",
+    case=False, na=False)]
+map_df = map_df[['Регион', 'Всего']].copy()
+map_df.rename(columns={'Всего': 'tajik_migrants'}, inplace=True)
+
+# -----------------------------
+# 3. Rename regions to match GeoJSON
+# -----------------------------
+rename_dict = {
+    "Кабардино-Балкарская Республика": "Кабардино-Балкарский",
+    "Карачаево-Черкесская Республика": "Карачаево-Черкесский",
+    "Кемеровская область - Кузбасс": "Кемеровская область",
+    "Республика Адыгея": "Адыгея",
+    "Республика Алтай": "Алтай",
+    "Республика Башкортостан": "Башкортостан",
+    "Республика Дагестан": "Дагестан",
+    "Республика Ингушетия": "Ингушетия",
+    "Республика Крым": "Республика Крым",
+    "Республика Марий Эл": "Марий Эл",
+    "Республика Северная Осетия - Алания": "Северная Осетия — Алания",
+    "Республика Татарстан": "Татарстан",
+    "Республика Тыва": "Тыва",
+    "Удмуртская Республика": "Удмуртская Республика",
+    "Чеченская Республика": "Чеченская Республика",
+    "Чувашская Республика": "Чувашия"
+}
+map_df['Регион'] = map_df['Регион'].replace(rename_dict)
+
+# -----------------------------
+# 4. Load Russia GeoJSON
+# -----------------------------
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# -----------------------------
+# 5. Check missing regions
+# -----------------------------
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+missing = [name for name in map_df['Регион'] if name not in geo_names]
+print("Regions missing in GeoJSON after renaming:", missing)
+
+
+
+
+import pandas as pd
+import json
+
+# -----------------------------
+# 1. Load aggregated Tajik migrants CSV
+# -----------------------------
+map_df = pd.read_csv("tajik_aggregated_correct.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Clean table for mapping
+# -----------------------------
+map_df = map_df[~map_df['Регион'].str.contains(
+    "федеральный округ|без автономного округа|без автономных округов",
+    case=False, na=False)]
+map_df = map_df[['Регион', 'Всего']].copy()
+map_df.rename(columns={'Всего': 'tajik_migrants'}, inplace=True)
+
+# -----------------------------
+# 3. Initial renaming to match most GeoJSON names
+# -----------------------------
+rename_dict = {
+    "Кабардино-Балкарская Республика": "Кабардино-Балкария",
+    "Карачаево-Черкесская Республика": "Карачаево-Черкесия",
+    "Кемеровская область - Кузбасс": "Кемеровская область",
+    "Республика Адыгея": "Адыгея",
+    "Республика Алтай": "Алтай",
+    "Республика Башкортостан": "Башкортостан",
+    "Республика Дагестан": "Дагестан",
+    "Республика Ингушетия": "Ингушетия",
+    "Республика Крым": "Крым",
+    "Республика Марий Эл": "Марий Эл",
+    "Республика Северная Осетия - Алания": "Северная Осетия",
+    "Республика Татарстан": "Татарстан",
+    "Республика Тыва": "Тыва",
+    "Удмуртская Республика": "Удмуртия",
+    "Чеченская Республика": "Чечня",
+    "Чувашская Республика": "Чувашия"
+}
+map_df['Регион'] = map_df['Регион'].replace(rename_dict)
+
+# -----------------------------
+# 4. Load Russia GeoJSON safely
+# -----------------------------
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# -----------------------------
+# 5. Check the exact names for the problematic regions
+# -----------------------------
+problem_keywords = ['Кабардино', 'Карачаево', 'Крым', 'Осетия', 'Удмурт', 'Чечн']
+print("Exact GeoJSON names for missing regions:")
+for feature in russia_geojson.get('features', []):
+    name = feature.get('properties', {}).get('name', '')
+    if any(keyword in name for keyword in problem_keywords):
+        print(name)
+
+# -----------------------------
+# 6. Final check: see which table regions are still missing
+# -----------------------------
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+missing = [name for name in map_df['Регион'] if name not in geo_names]
+print("\nRegions missing in GeoJSON after renaming:", missing)
+
+
+
+import pandas as pd
+import json
+
+# -----------------------------
+# 1. Load aggregated Tajik migrants CSV
+# -----------------------------
+map_df = pd.read_csv("tajik_aggregated_correct.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Clean table for mapping
+# -----------------------------
+map_df = map_df[~map_df['Регион'].str.contains(
+    "федеральный округ|без автономного округа|без автономных округов",
+    case=False, na=False)]
+map_df = map_df[['Регион', 'Всего']].copy()
+map_df.rename(columns={'Всего': 'tajik_migrants'}, inplace=True)
+
+# -----------------------------
+# 3. Final renaming to match GeoJSON
+# -----------------------------
+rename_dict = {
+    "Кабардино-Балкарская Республика": "Кабардино-Балкарская республика",
+    "Карачаево-Черкесская Республика": "Карачаево-Черкесская республика",
+    "Кемеровская область - Кузбасс": "Кемеровская область",
+    "Республика Адыгея": "Адыгея",
+    "Республика Алтай": "Алтай",
+    "Республика Башкортостан": "Башкортостан",
+    "Республика Дагестан": "Дагестан",
+    "Республика Ингушетия": "Ингушетия",
+    "Республика Крым": "Крым",
+    "Республика Марий Эл": "Марий Эл",
+    "Республика Северная Осетия - Алания": "Северная Осетия - Алания",
+    "Республика Татарстан": "Татарстан",
+    "Республика Тыва": "Тыва",
+    "Удмуртская Республика": "Удмуртская республика",
+    "Чеченская Республика": "Чеченская республика",
+    "Чувашская Республика": "Чувашия"
+}
+map_df['Регион'] = map_df['Регион'].replace(rename_dict)
+
+# -----------------------------
+# 4. Remove Crimea (not in GeoJSON)
+# -----------------------------
+map_df = map_df[map_df['Регион'] != 'Крым']
+
+# -----------------------------
+# 5. Load Russia GeoJSON
+# -----------------------------
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# -----------------------------
+# 6. Check missing regions
+# -----------------------------
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+missing = [name for name in map_df['Регион'] if name not in geo_names]
+print("Regions missing in GeoJSON after renaming and removing Crimea:", missing)
+
+# -----------------------------
+# 7. Save cleaned table for mapping (optional)
+# -----------------------------
+map_df.to_csv("tajik_aggregated_for_map.csv", index=False, encoding="utf-8-sig")
+
+
+
+
+
+
+import pandas as pd
+import plotly.express as px
+
+# Example bins and categories
+bins = [0, 50, 200, 500, 1000, 5000, 15000]
+labels = ['0-50','51-200','201-500','501-1000','1001-5000','5001+']
+full_df['category'] = pd.cut(full_df['tajik_migrants'], bins=bins, labels=labels, include_lowest=True)
+
+# Define custom colors for each category in the same order as labels
+custom_colors = ['#ffffcc',  # 0-50, very light yellow
+                 '#a1dab4',  # 51-200, light green
+                 '#41b6c4',  # 201-500, cyan
+                 '#2c7fb8',  # 501-1000, blue
+                 '#253494',  # 1001-5000, dark blue
+                 '#081d58']  # 5001+, very dark blue
+
+# Create choropleth with discrete colors
+fig = px.choropleth(
+    full_df,
+    geojson=russia_geojson,
+    locations='Регион',
+    featureidkey='properties.name',
+    color='category',
+    color_discrete_sequence=custom_colors,
+    hover_name='Регион',
+    hover_data={'tajik_migrants': True},
+    title='Tajik Migrants in Russia by Region'
+)
+
+# Update layout for better display
+fig.update_geos(fitbounds="locations", visible=False)
+fig.update_layout(margin={"r":0,"t":50,"l":0,"b":0})
+
+fig.show()
+
+
+
+
+
+import pandas as pd
+import json
+import plotly.express as px
+
+# -----------------------------
+# 1. Load cleaned Tajik migrants CSV
+# -----------------------------
+map_df = pd.read_csv("tajik_aggregated_correct.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Clean table for mapping
+# -----------------------------
+map_df = map_df[~map_df['Регион'].str.contains(
+    "федеральный округ|без автономного округа|без автономных округов",
+    case=False, na=False)]
+map_df = map_df[['Регион', 'Всего']].copy()
+map_df.rename(columns={'Всего': 'tajik_migrants'}, inplace=True)
+
+# -----------------------------
+# 3. Rename regions to match GeoJSON
+# -----------------------------
+rename_dict = {
+    "Кабардино-Балкарская Республика": "Кабардино-Балкарская республика",
+    "Карачаево-Черкесская Республика": "Карачаево-Черкесская республика",
+    "Кемеровская область - Кузбасс": "Кемеровская область",
+    "Республика Адыгея": "Адыгея",
+    "Республика Алтай": "Алтай",
+    "Республика Башкортостан": "Башкортостан",
+    "Республика Дагестан": "Дагестан",
+    "Республика Ингушетия": "Ингушетия",
+    "Республика Крым": "Крым",
+    "Республика Марий Эл": "Марий Эл",
+    "Республика Северная Осетия - Алания": "Северная Осетия - Алания",
+    "Республика Татарстан": "Татарстан",
+    "Республика Тыва": "Тыва",
+    "Удмуртская Республика": "Удмуртская республика",
+    "Чеченская Республика": "Чеченская республика",
+    "Чувашская Республика": "Чувашия"
+}
+map_df['Регион'] = map_df['Регион'].replace(rename_dict)
+
+# -----------------------------
+# 4. Remove Crimea (not in GeoJSON)
+# -----------------------------
+map_df = map_df[map_df['Регион'] != 'Крым']
+
+# -----------------------------
+# 5. Load Russia GeoJSON
+# -----------------------------
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# -----------------------------
+# 6. Ensure all regions from GeoJSON are in the table
+# -----------------------------
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+full_df = pd.DataFrame({'Регион': geo_names})
+full_df = full_df.merge(map_df, on='Регион', how='left')
+full_df['tajik_migrants'] = full_df['tajik_migrants'].fillna(0)
+
+# -----------------------------
+# 7. Create bins for discrete coloring
+# -----------------------------
+bins = [0, 50, 200, 500, 1000, 5000, 15000]
+labels = ['0-50','51-200','201-500','501-1000','1001-5000','5001+']
+full_df['category'] = pd.cut(full_df['tajik_migrants'], bins=bins, labels=labels, include_lowest=True)
+
+# -----------------------------
+# 8. Define custom colors for bins
+# -----------------------------
+custom_colors = [
+    '#ffffb2',  # 0-50, light yellow
+    '#fed976',  # 51-200, dark yellow
+    '#fd8d3c',  # 201-500, orange
+    '#f03b20',  # 501-1000, light red
+    '#bd0026',  # 1001-5000, red
+    '#400000'   # 5001+, reddish black
+]
+
+# -----------------------------
+# 9. Create choropleth map
+# -----------------------------
+fig = px.choropleth(
+    full_df,
+    geojson=russia_geojson,
+    locations='Регион',
+    featureidkey='properties.name',
+    color='category',
+    color_discrete_sequence=custom_colors,
+    hover_name='Регион',
+    hover_data={'tajik_migrants': True},
+    title='Tajik Migrants in Russia by Region'
+)
+
+# -----------------------------
+# 10. Update layout for better display
+# -----------------------------
+fig.update_geos(fitbounds="locations", visible=False)
+fig.update_layout(
+    margin={"r":0,"t":50,"l":0,"b":0},
+    legend_title_text='Number of Tajik Migrants'
+)
+
+# -----------------------------
+# 11. Show map
+# -----------------------------
+fig.show()
+
+# -----------------------------
+# 12. Save cleaned CSV for reference (optional)
+# -----------------------------
+full_df.to_csv("tajik_aggregated_for_map_final.csv", index=False, encoding="utf-8-sig")
+
+
+
+
+
+
+import pandas as pd
+import json
+import plotly.express as px
+
+# -----------------------------
+# 1. Load cleaned table and GeoJSON
+# -----------------------------
+map_df = pd.read_csv("tajik_aggregated_for_map.csv", encoding="utf-8-sig")
+
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# -----------------------------
+# 2. Ensure all GeoJSON regions are in the table
+# -----------------------------
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+
+full_df = pd.DataFrame({'Регион': geo_names})
+full_df = full_df.merge(map_df, on='Регион', how='left')
+full_df['tajik_migrants'] = full_df['tajik_migrants'].fillna(0)
+
+# -----------------------------
+# 3. Create bins for discrete coloring
+# -----------------------------
+bins = [0, 50, 200, 500, 1000, 5000, 15000]
+labels = ['0-50','51-200','201-500','501-1000','1001-5000','5001+']
+full_df['category'] = pd.cut(full_df['tajik_migrants'], bins=bins, labels=labels, include_lowest=True)
+
+# -----------------------------
+# 4. Define blue shades for bins
+# -----------------------------
+custom_colors = [
+    '#deebf7',  # 0-50, very light blue
+    '#9ecae1',  # 51-200, light blue
+    '#6baed6',  # 201-500, medium blue
+    '#3182bd',  # 501-1000, strong blue
+    '#08519c',  # 1001-5000, dark blue
+    '#08306b'   # 5001+, very dark blue
+]
+
+# -----------------------------
+# 5. Create choropleth with discrete colors
+# -----------------------------
+fig = px.choropleth(
+    full_df,
+    geojson=russia_geojson,
+    locations='Регион',
+    featureidkey='properties.name',
+    color='category',
+    color_discrete_sequence=custom_colors,
+    hover_name='Регион',
+    hover_data={'tajik_migrants': True},
+    title='Tajik Migrants in Russia by Region'
+)
+
+# -----------------------------
+# 6. Update layout
+# -----------------------------
+fig.update_geos(fitbounds="locations", visible=False)
+fig.update_layout(margin={"r":0,"t":50,"l":0,"b":0},
+                  legend_title_text='Number of Tajik Migrants')
+
+# -----------------------------
+# 7. Show map
+# -----------------------------
+fig.show()
+
+
+import pandas as pd
+
+# -----------------------------
+# 1. Load purpose-level table
+# -----------------------------
+df = pd.read_csv("tajik_purpose_by_region.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Define main purpose columns
+# -----------------------------
+main_purposes = [
+    "работу",
+    "учебу",
+    "частную поездку",
+    "служебную или деловую поездку"
+]
+
+# -----------------------------
+# 3. Define minor purposes to be grouped as "другие"
+# -----------------------------
+minor_purposes = [
+    "туризм, отдых",
+    "транзитное перемещение",
+    "другую цель",
+    "Не указавшие цель приезда"
+]
+
+# -----------------------------
+# 4. Ensure numeric values
+# -----------------------------
+for col in main_purposes + minor_purposes:
+    if col in df.columns:
+        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+
+# -----------------------------
+# 5. Create "другие" column
+# -----------------------------
+df["другие"] = df[minor_purposes].sum(axis=1)
+
+# -----------------------------
+# 6. Keep only relevant columns
+# -----------------------------
+corrected_df = df[
+    ["Регион", "Всего"] + main_purposes + ["другие"]
+].copy()
+
+# -----------------------------
+# 7. Save corrected table
+# -----------------------------
+corrected_df.to_csv(
+    "tajik_purpose_corrected.csv",
+    index=False,
+    encoding="utf-8-sig"
+)
+
+print("Table correction complete. File saved as 'tajik_purpose_corrected.csv'")
+
+
+
+
+import pandas as pd
+import plotly.express as px
+
+# -----------------------------
+# 1. Load corrected table
+# -----------------------------
+df = pd.read_csv("tajik_purpose_corrected.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Convert to long format
+# -----------------------------
+long_df = df.melt(
+    id_vars=["Регион"],  # keep region as fixed column
+    value_vars=["работу", "учебу", "частную поездку", "служебную или деловую поездку", "другие"],  # purposes
+    var_name="purpose",
+    value_name="count"
+)
+
+# -----------------------------
+# 3. Optional: sort regions by total migrants
+# -----------------------------
+region_order = df.sort_values("Всего", ascending=False)["Регион"]
+long_df["Регион"] = pd.Categorical(long_df["Регион"], categories=region_order, ordered=True)
+
+# -----------------------------
+# 4. Plot stacked bar chart
+# -----------------------------
+# Blue-themed color palette
+color_map = {
+    "работу": "#1f77b4",                   # dark blue
+    "учебу": "#6baed6",                    # medium blue
+    "частную поездку": "#9ecae1",          # lighter blue
+    "служебную или деловую поездку": "#c6dbef", # very light blue
+    "другие": "#e0f3f8"                    # pale blue
+}
+
+fig = px.bar(
+    long_df,
+    x="Регион",
+    y="count",
+    color="purpose",
+    color_discrete_map=color_map,
+    title="Tajik Migrants in Russia by Purpose and Region"
+)
+
+fig.update_layout(
+    xaxis_tickangle=-45,
+    margin={"r":20,"t":50,"l":20,"b":150},
+    legend_title_text="Purpose"
+)
+
+fig.show()
+
+
+
+
+import pandas as pd
+import plotly.express as px
+
+# -----------------------------
+# 1. Load corrected table
+# -----------------------------
+df = pd.read_csv("tajik_purpose_corrected.csv", encoding="utf-8-sig")
+
+# -----------------------------
+# 2. Convert to long format
+# -----------------------------
+long_df = df.melt(
+    id_vars=["Регион"],  # keep region as fixed column
+    value_vars=["работу", "учебу", "частную поездку", "служебную или деловую поездку", "другие"],  # purposes
+    var_name="purpose",
+    value_name="count"
+)
+
+# -----------------------------
+# 3. Optional: sort regions by total migrants
+# -----------------------------
+region_order = df.sort_values("Всего", ascending=False)["Регион"]
+long_df["Регион"] = pd.Categorical(long_df["Регион"], categories=region_order, ordered=True)
+
+# -----------------------------
+# 4. Plot stacked bar chart
+# -----------------------------
+# Blue-themed color palette
+color_map = {
+    "работу": "#1f77b4",                   # dark blue
+    "учебу": "#6baed6",                    # medium blue
+    "частную поездку": "#9ecae1",          # lighter blue
+    "служебную или деловую поездку": "#c6dbef", # very light blue
+    "другие": "#e0f3f8"                    # pale blue
+}
+
+fig = px.bar(
+    long_df,
+    x="Регион",
+    y="count",
+    color="purpose",
+    color_discrete_map=color_map,
+    title="Tajik Migrants in Russia by Purpose and Region"
+)
+
+# -----------------------------
+# 5. Improve x-axis readability
+# -----------------------------
+fig.update_layout(
+    xaxis_tickangle=-45,           # rotate labels
+    xaxis_tickfont=dict(size=10),  # smaller font
+    margin={"r":20,"t":50,"l":20,"b":200},  # increase bottom margin
+    width=1600,                    # increase figure width
+    legend_title_text="Purpose"
+)
+
+# -----------------------------
+# 6. Show chart
+# -----------------------------
+fig.show()
+
+
+
+# Updated color map inspired by amCharts palette
+color_map = {
+    "работу": "#2f75b5",       # muted blue
+    "учебу": "#92d050",        # muted green
+    "частную поездку": "#ffc000",     # soft gold
+    "служебную или деловую поездку": "#00b0f0", # light blue
+    "другие": "#7030a0"        # soft purple
+}
+
+fig = px.bar(
+    long_df,
+    x="Регион",
+    y="count",
+    color="purpose",
+    color_discrete_map=color_map,
+    title="Tajik Migrants in Russia by Purpose and Region"
+)
+
+fig.update_layout(
+    xaxis_tickangle=-45,
+    xaxis_tickfont=dict(size=10),
+    margin={"r":20,"t":50,"l":20,"b":200},
+    width=1600,
+    legend_title_text="Purpose"
+)
+
+fig.show()
+
+
+# Stacked bar chart with muted professional colors
+color_map = {
+    "работу": "#4E79A7",
+    "учебу": "#59A14F",
+    "частную поездку": "#76B7B2",
+    "служебную или деловую поездку": "#B07AA1",
+    "другие": "#BAB0AC"
+}
+
+fig = px.bar(
+    long_df,
+    x="Регион",
+    y="count",
+    color="purpose",
+    color_discrete_map=color_map,
+    title="Tajik Migrants in Russia by Purpose and Region"
+)
+
+fig.update_layout(
+    barmode="stack",
+    xaxis_tickangle=45,
+    margin=dict(l=40, r=40, t=60, b=120),
+    legend_title_text="Purpose of Migration"
+)
+
+fig.show()
+
+
+
+
+
+import pandas as pd
+import plotly.express as px
+
+# -----------------------------------
+# 1. Long-format data already exists
+#    Columns: Регион | purpose | count
+# -----------------------------------
+
+# Example: if loading from CSV
+# long_df = pd.read_csv("tajik_long_format.csv", encoding="utf-8-sig")
+
+# -----------------------------------
+# 2. Calculate total migrants per region
+# -----------------------------------
+region_totals = (
+    long_df
+    .groupby("Регион")["count"]
+    .sum()
+    .reset_index()
+)
+
+# -----------------------------------
+# 3. Filter regions with small numbers
+# -----------------------------------
+threshold = 100  # justified analytical threshold
+
+valid_regions = region_totals[
+    region_totals["count"] >= threshold
+]["Регион"]
+
+filtered_df = long_df[
+    long_df["Регион"].isin(valid_regions)
+]
+
+# -----------------------------------
+# 4. Order regions from highest to lowest
+# -----------------------------------
+region_order = (
+    filtered_df
+    .groupby("Регион")["count"]
+    .sum()
+    .sort_values(ascending=False)
+    .index
+    .tolist()
+)
+
+# -----------------------------------
+# 5. Define final color palette
+# -----------------------------------
+color_map = {
+    "работу": "#4E79A7",
+    "учебу": "#76B7B2",
+    "частную поездку": "#59A14F",
+    "служебную или деловую поездку": "#B07AA1",
+    "другие": "#BAB0AC"
+}
+
+# -----------------------------------
+# 6. Create stacked bar chart
+# -----------------------------------
+fig = px.bar(
+    filtered_df,
+    x="Регион",
+    y="count",
+    color="purpose",
+    category_orders={"Регион": region_order},
+    color_discrete_map=color_map,
+    title="Tajik Migrants in Russia by Purpose (Regions with ≥100 Migrants)"
+)
+
+# -----------------------------------
+# 7. Layout adjustments
+# -----------------------------------
+fig.update_layout(
+    barmode="stack",
+    xaxis_title="Russian Regions",
+    yaxis_title="Number of Tajik Migrants",
+    xaxis_tickangle=45,
+    legend_title_text="Purpose of Migration",
+    margin=dict(l=40, r=40, t=70, b=160)
+)
+
+# -----------------------------------
+# 8. Show figure
+# -----------------------------------
+fig.show()
+
+
+
+
+import pandas as pd
+import plotly.express as px
+
+# -----------------------------------
+# 1. Load your aggregated table (wide format)
+# -----------------------------------
+wide_df = pd.read_csv(
+    "tajik_aggregated_correct.csv",
+    encoding="utf-8-sig"
+)
+
+# -----------------------------------
+# 2. Keep only main purposes
+# -----------------------------------
+purpose_columns = [
+    "работу",
+    "учебу",
+    "частную поездку",
+    "служебную или деловую поездку",
+    "другую цель"
+]
+
+wide_df = wide_df[["Регион"] + purpose_columns]
+
+# Rename "другую цель" → "другие"
+wide_df = wide_df.rename(columns={"другую цель": "другие"})
+
+# -----------------------------------
+# 3. Convert to long format (THIS creates long_df)
+# -----------------------------------
+long_df = wide_df.melt(
+    id_vars="Регион",
+    var_name="purpose",
+    value_name="count"
+)
+
+# -----------------------------------
+# 4. Calculate total migrants per region
+# -----------------------------------
+region_totals = (
+    long_df
+    .groupby("Регион")["count"]
+    .sum()
+    .reset_index()
+)
+
+# -----------------------------------
+# 5. Remove regions with very small numbers
+# -----------------------------------
+threshold = 100
+
+valid_regions = region_totals[
+    region_totals["count"] >= threshold
+]["Регион"]
+
+filtered_df = long_df[
+    long_df["Регион"].isin(valid_regions)
+]
+
+# -----------------------------------
+# 6. Order regions from highest to lowest
+# -----------------------------------
+region_order = (
+    filtered_df
+    .groupby("Регион")["count"]
+    .sum()
+    .sort_values(ascending=False)
+    .index
+    .tolist()
+)
+
+# -----------------------------------
+# 7. Define final color palette
+# -----------------------------------
+color_map = {
+    "работу": "#4E79A7",
+    "учебу": "#76B7B2",
+    "частную поездку": "#59A14F",
+    "служебную или деловую поездку": "#B07AA1",
+    "другие": "#BAB0AC"
+}
+
+# -----------------------------------
+# 8. Create stacked bar chart
+# -----------------------------------
+fig = px.bar(
+    filtered_df,
+    x="Регион",
+    y="count",
+    color="purpose",
+    category_orders={"Регион": region_order},
+    color_discrete_map=color_map,
+    title="Tajik Migrants in Russia by Purpose (Regions with ≥100 Migrants)"
+)
+
+fig.update_layout(
+    barmode="stack",
+    xaxis_tickangle=45,
+    legend_title_text="Purpose of Migration",
+    margin=dict(l=40, r=40, t=70, b=160)
+)
+
+fig.show()
+
+
+
+
+import pandas as pd
+import json
+import plotly.express as px
+
+# -----------------------------
+# 1. Load long-format data
+# -----------------------------
+long_df = pd.read_csv("tajik_long_format.csv", encoding="utf-8-sig")
+
+# Keep only WORK purpose
+work_df = long_df[long_df['purpose'] == 'работу']
+
+# -----------------------------
+# 2. Load Russia GeoJSON
+# -----------------------------
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+
+# -----------------------------
+# 3. Ensure all regions are present
+# -----------------------------
+full_df = pd.DataFrame({'Регион': geo_names})
+full_df = full_df.merge(
+    work_df[['Регион', 'count']],
+    on='Регион',
+    how='left'
+)
+
+full_df['count'] = full_df['count'].fillna(0)
+
+# -----------------------------
+# 4. Create choropleth map
+# -----------------------------
+fig = px.choropleth(
+    full_df,
+    geojson=russia_geojson,
+    locations='Регион',
+    featureidkey='properties.name',
+    color='count',
+    color_continuous_scale=[
+        "#e3f2fd",  # very light blue
+        "#90caf9",
+        "#42a5f5",
+        "#1e88e5",
+        "#0d47a1"   # dark blue
+    ],
+    hover_name='Регион',
+    hover_data={'count': True},
+    title='Tajik Migrants in Russia by Region (Work Purpose)'
+)
+
+# -----------------------------
+# 5. Layout
+# -----------------------------
+fig.update_geos(fitbounds="locations", visible=False)
+fig.update_layout(margin={"r":0,"t":50,"l":0,"b":0})
+
+# -----------------------------
+# 6. Show map
+# -----------------------------
+fig.show()
+
+
+
+import pandas as pd
+
+# --------------------------------------------------
+# 1. Load your aggregated table (wide format)
+# --------------------------------------------------
+# This file should contain columns like:
+# Регион | работу | учебу | частную поездку | служебную или деловую поездку | другие
+
+df = pd.read_csv(
+    "tajik_by_purpose_aggregated.csv",
+    encoding="utf-8-sig"
+)
+
+print("Original wide-format table:")
+print(df.head())
+
+# --------------------------------------------------
+# 2. Convert to long (tidy) format
+# --------------------------------------------------
+long_df = df.melt(
+    id_vars="Регион",
+    var_name="purpose",
+    value_name="count"
+)
+
+# Replace missing values with 0
+long_df["count"] = long_df["count"].fillna(0)
+
+print("\nLong-format table:")
+print(long_df.head(10))
+
+# --------------------------------------------------
+# 3. Save long-format table for reuse
+# --------------------------------------------------
+long_df.to_csv(
+    "tajik_long_format.csv",
+    index=False,
+    encoding="utf-8-sig"
+)
+
+print("\nLong-format data saved as tajik_long_format.csv")
+
+
+
+
+
+import pandas as pd
+import json
+import plotly.express as px
+
+# -----------------------------
+# 1. Load cleaned table and GeoJSON
+# -----------------------------
+map_df = pd.read_csv("tajik_aggregated_for_map.csv", encoding="utf-8-sig")
+
+with open("russia.geojson", "r", encoding="utf-8") as f:
+    russia_geojson = json.load(f)
+
+# -----------------------------
+# 2. Ensure all GeoJSON regions are in the table
+# -----------------------------
+geo_names = [f['properties']['name'] for f in russia_geojson['features']]
+
+full_df = pd.DataFrame({'Регион': geo_names})
+full_df = full_df.merge(map_df, on='Регион', how='left')
+full_df['tajik_migrants'] = full_df['tajik_migrants'].fillna(0)
+
+# -----------------------------
+# 3. Create bins and categories
+# -----------------------------
+bins = [0, 50, 200, 500, 1000, 5000, 15000]
+labels = ['0-50','51-200','201-500','501-1000','1001-5000','5001+']
+
+full_df['category'] = pd.cut(
+    full_df['tajik_migrants'],
+    bins=bins,
+    labels=labels,
+    include_lowest=True
+)
+
+# -----------------------------
+# 4. Define discrete blue palette
+# -----------------------------
+custom_colors = [
+    '#deebf7',
+    '#c6dbef',
+    '#9ecae1',
+    '#6baed6',
+    '#3182bd',
+    '#08519c'
+]
+
+# -----------------------------
+# 5. Create choropleth (FIXED legend order)
+# -----------------------------
+fig = px.choropleth(
+    full_df,
+    geojson=russia_geojson,
+    locations='Регион',
+    featureidkey='properties.name',
+    color='category',
+    color_discrete_sequence=custom_colors,
+    category_orders={
+        'category': labels
+    },
+    hover_name='Регион',
+    hover_data={'tajik_migrants': True},
+    title='Tajik Migrants in Russia by Region'
+)
+
+# -----------------------------
+# 6. Layout
+# -----------------------------
+fig.update_geos(fitbounds="locations", visible=False)
+fig.update_layout(
+    margin={"r":0,"t":50,"l":0,"b":0},
+    legend_title_text='Number of Tajik Migrants'
+)
+
+# -----------------------------
+# 7. Show map
+# -----------------------------
+fig.show()
+
