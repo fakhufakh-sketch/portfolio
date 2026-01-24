@@ -2,7 +2,7 @@
 title:  "Tajik Migrant"
 permalink: /tajikmigrant/
 layout: page
-image: images/projects_banner.png
+image: images/banner_image.png
 --- 
 
 <!--more-->
@@ -62,7 +62,7 @@ For the bar chart, the dataset used for the choropleth map was further processed
 
 Because Moscow city (g. Moskva) and Moscow oblast (Moskovskaja oblast’) record substantially higher numbers of Tajik migrants than other regions, including them in a single chart made comparisons between smaller regions difficult. To address this imbalance, two separate stacked bar charts were created: one focusing exclusively on Moscow city and Moscow oblast, and another displaying all remaining regions. This approach improves comparability and allows patterns in migration purposes across less dominant regions to be interpreted more clearly.Additionally, the colour scheme of the stacked bars was changed from a blue palette to a purple palette to improve visual clarity and make distinctions between categories easier to perceive, enhancing the overall readability of the chart.
 
-![A _choropleth_map_ of_Russia]({{site.baseurl}}images/Barchart.jpeg)
+![A _stacked_bar_chart_ of_Russia]({{site.baseurl}}images/Barchart.jpeg)
 
 [Stacked_Bar_Chart](https://fakhufakh-sketch.github.io/portfolio/Project2/Visualizations/SBarchart_Final_001.htmll)
 
