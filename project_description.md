@@ -2,7 +2,7 @@
 title:  "Tajik Migrant"
 permalink: /tajikmigrant/
 layout: page
-image: images/projects-banner_image
+image: images/projects_banner.png
 --- 
 
 <!--more-->
@@ -21,7 +21,7 @@ To answer my research question, I initially planned to collect qualitative data 
 
 Following feedback from my instructor, I identified a more appropriate and reliable data source: the provisional results of the 2021 Russian Census published by the Federal State Statistics Service (Rosstat). I downloaded an Excel file from Rosstat, specifically Table 8: “Population temporarily staying in the territory of the Russian Federation, by country of permanent residence and purpose of visit, by Russian regions.” While this dataset was highly relevant to my research question, it was also complex, as it combined multiple Russian regions, countries of origin, and migration purposes within a single file. Preparing this data for visualization required significant effort in cleaning, restructuring, and translating the table. Additionally, due to access restrictions, I was unable to open the Rosstat website using the Safari browser and instead used the Yandex browser to access and download the data.
 
-[Choropleth](https://fakhufakh-sketch.github.io/portfolio/Project2/Corpus/ethinicity-purpose-province.xlsx)
+[Regional Table](https://fakhufakh-sketch.github.io/portfolio/Project2/Corpus/ethinicity-purpose-province.xlsx)
 
 ## Step one 
 
@@ -49,7 +49,7 @@ Combining the aggregated migration data with a comprehensive GeoJSON file of Rus
 By mapping migrant counts directly onto regional boundaries, the choropleth map enables immediate visual comparison between regions and highlights patterns of concentration and absence that are difficult to identify in tabular form. The use of a sequential colour scale further supports interpretation by indicating relative differences in migrant presence, from regions with low or no recorded migration to those with higher concentrations.
 
 
-![A _choropleth_map_ of_Russia]({{site.baseurl}}images/ch.jpeg)
+![A _choropleth_map_ of_Russia]({{site.baseurl}}images/map_ch.jpeg)
 
 [Choropleth](https://fakhufakh-sketch.github.io/portfolio/Project2/Visualizations/Choropleth_map_Final.html)
 
@@ -64,7 +64,7 @@ Because Moscow city (g. Moskva) and Moscow oblast (Moskovskaja oblast’) record
 
 ![A _choropleth_map_ of_Russia]({{site.baseurl}}images/Barchart.jpeg)
 
-[Choropleth](https://fakhufakh-sketch.github.io/portfolio/Project2/Visualizations/SBarchart_Final_001.htmll)
+[Stacked_Bar_Chart](https://fakhufakh-sketch.github.io/portfolio/Project2/Visualizations/SBarchart_Final_001.htmll)
 
 The visualisations reveal clear spatial and functional patterns in Tajik migration across Russia. The choropleth map shows that Moscow city and Moscow oblast host the highest numbers of migrants, with other regions exhibiting much lower totals. This highlights the central role of the capital region in attracting Tajik migrants. The stacked bar charts further unpack these patterns by migration purpose: work-related migration dominates in most regions, followed by study and private visits, while official or business trips represent a smaller proportion. Aggregating minor purposes into an “other” category simplified the comparison between regions without losing meaningful information. Separating Moscow city and Moscow oblast into a dedicated chart also made it easier to observe patterns in smaller regions, where the relative importance of study and private visits is more visible. Overall, these visualisations demonstrate both the concentration of migration in the capital region and the diverse purposes driving Tajik migration throughout the country.
 
