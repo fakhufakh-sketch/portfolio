@@ -1,6 +1,6 @@
 ---
-title:  "Project 2"
-permalink: /projects/
+title:  "Tajik Migrant"
+permalink: /tajikmigrant/
 layout: page
 image: images/projects-banner_image
 --- 
