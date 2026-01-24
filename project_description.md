@@ -64,7 +64,7 @@ Because Moscow city (g. Moskva) and Moscow oblast (Moskovskaja oblast’) record
 
 ![A _stacked_bar_chart_ of_Russia]({{site.baseurl}}images/Barchart.jpeg)
 
-[Stacked_Bar_Chart](https://fakhufakh-sketch.github.io/portfolio/Project2/Visualizations/SBarchart_Final_001.htmll)
+[Stacked_Bar_Chart](https://fakhufakh-sketch.github.io/portfolio/Project2/Visualizations/SBarchart_Final_001.html)
 
 The visualisations reveal clear spatial and functional patterns in Tajik migration across Russia. The choropleth map shows that Moscow city and Moscow oblast host the highest numbers of migrants, with other regions exhibiting much lower totals. This highlights the central role of the capital region in attracting Tajik migrants. The stacked bar charts further unpack these patterns by migration purpose: work-related migration dominates in most regions, followed by study and private visits, while official or business trips represent a smaller proportion. Aggregating minor purposes into an “other” category simplified the comparison between regions without losing meaningful information. Separating Moscow city and Moscow oblast into a dedicated chart also made it easier to observe patterns in smaller regions, where the relative importance of study and private visits is more visible. Overall, these visualisations demonstrate both the concentration of migration in the capital region and the diverse purposes driving Tajik migration throughout the country.
 
